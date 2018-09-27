@@ -17,7 +17,6 @@ class optimizer(object):
         play[0] = 1
         bestScore = 0
         while(True):
-            print play
             #When this condition occurs, it means that all plays have been
             #considered
             if (play[-1] == 1) and (play[-2] == 1):
@@ -27,9 +26,9 @@ class optimizer(object):
                 bestScore = score
                 bestPlay = play.copy()
             self.incrementPlay(play, 0)
-        print "Best Score", bestScore
-        print "Best Play", bestPlay
         self.displayBestPlay(bestPlay)
+        print "\nBest Score", bestScore
+        print "\nBest Play", bestPlay
 
     #Used to count through plays
     def incrementPlay(self, play, index):
@@ -91,13 +90,14 @@ class optimizer(object):
 
     # #Display options in a given play
     def displayBestPlay(self, play):
-        print(play)
-        print("\n\n")
+        print("\nOption Chain")
+        print("="*25)
         print(self.pandasChain)
-        print("\n\n")
         temp = np.arange(play.size)
         temp = np.multiply(play, temp)
         temp = np.where(temp>0)[0]
         if play[0] == 1:
             temp = np.insert(temp, 0, 0)
+        print("\nBest Play")
+        print("="*25)
         print(self.pandasChain.loc[temp])
